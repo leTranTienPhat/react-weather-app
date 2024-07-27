@@ -1,1 +1,3 @@
-# react-weather-app
+# React Weather App
+
+by leTranTienPhat
