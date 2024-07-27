@@ -51,6 +51,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        glass: {
+          DEFAULT: "hsl(var(--glass))",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -71,6 +74,9 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        'site-background': "var(--background-url)",
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

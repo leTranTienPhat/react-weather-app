@@ -1,6 +1,6 @@
 import InfoDisplay from "@/components/today-weather/components/InfoDisplay";
 import SearchHistory from "@/components/today-weather/components/SearchHistory";
-import GlassWrapper from "@/components/ui/customized/GlassWrapper";
+import GlassWrapper from "@/components/common/GlassWrapper";
 
 const TodayWeather = () => {
   return (
