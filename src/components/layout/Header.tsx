@@ -1,15 +1,15 @@
+import SearchSvg from "@/assets/icons/searchIcon";
+import CustomInput from "@/components/common/CustomInput";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ui/customized/ThemeToggle";
-import { Input } from "@/components/ui/input";
-import { SearchIcon } from "lucide-react";
 
 const Header = () => {
   return (
     <div className="w-full flex justify-center gap-2 md:gap-5 h-[60px] py-5">
       <div className="flex gap-5 w-full">
-        <Input placeholder="Enter Country..." />
-        <Button className="w-10 h-10 rounded-md p-0">
-          <SearchIcon size={20} />
+        <CustomInput placeholder="Search..." labelPosition="inside" label="Country" />
+        <Button className="w-[60px] h-[60px] rounded-2xl p-0 shrink-0">
+          <SearchSvg fill="white" width={36} height={36} />
         </Button>
       </div>
 
