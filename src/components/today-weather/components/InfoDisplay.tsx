@@ -6,6 +6,7 @@ import { useLocalStorage } from "@/context/LocalStorageContext";
 import { useSearch } from "@/context/SearchContext";
 import { dateFormat } from "@/lib/utils";
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 type IProps = {
   selectedHistory: ITodayWeatherResponse | null;
@@ -50,13 +51,23 @@ const InfoDisplay = ({ selectedHistory, setSelectedHistory }: IProps) => {
 
   return (
     <div className="relative">
-      {displayData?.weather && (
-        <img
-          src={displayData?.weather[0].id >= 700 ? images.sun : images.cloud}
-          alt="current weather"
-          className="w-[140px] md:w-[300px] absolute -top-[80px] md:-top-[120px] -right-[40px] transition-all"
-        />
-      )}
+      <AnimatePresence initial={false}>
+        {displayData?.weather && (
+          <motion.div
+            key={selectedHistory?.id}
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ type: "spring", stiffness: 100, duration: 0.3 }}
+            className="absolute -top-[80px] md:-top-[120px] -right-[40px]"
+          >
+            <img
+              src={displayData?.weather[0].id >= 700 ? images.sun : images.cloud}
+              alt="current weather"
+              className="w-[140px] md:w-[300px]"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div>
         <h1 className="font-semibold">Today's Weather</h1>
         <p className="text-[80px] sm:text-[100px] leading-none text-primary dark:text-white font-bold">

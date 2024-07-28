@@ -24,7 +24,7 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
     if (value !== "") setOpenSearchDropdown(true);
     else setOpenSearchDropdown(false);
     setSearchQuery(value);
-  }, 500);
+  }, 250);
 
   const { data: locationList, isFetching } = useApiGetLocationList(
     {

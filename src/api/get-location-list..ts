@@ -17,7 +17,7 @@ export type ILocationListResponse = {
 type IParams = IApiParams & { q: string; limit: number; appId: string };
 
 const getLocationListApi = (params?: IParams | IApiParams): Promise<ILocationListResponse[]> =>
-  apiCallHandler({ method: "get", endpoint, params });
+  apiCallHandler({ method: "get", endpoint, params, notification: false });
 
 export const useApiGetLocationList = (
   options?: Omit<UseQueryOptions<ILocationListResponse[]>, "queryKey" | "queryFn">,
