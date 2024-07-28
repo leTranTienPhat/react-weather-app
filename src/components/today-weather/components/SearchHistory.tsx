@@ -67,7 +67,7 @@ const SearchHistory = ({ selectedHistory, setSelectedHistory }: IProps) => {
         <AnimatePresence initial={false}>
           {getWeatherHistory()?.map((history) => (
             <motion.div
-              key={history.id}
+              key={history.id + String(history?.timestamp!.toString())}
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
