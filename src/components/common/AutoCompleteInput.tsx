@@ -5,7 +5,7 @@ import { useSearch } from "@/context/SearchContext";
 import { cn } from "@/lib/utils";
 import { useDebouncedCallback } from "use-debounce";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 
 type IProps = React.InputHTMLAttributes<HTMLInputElement> & {
@@ -17,14 +17,17 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [openSearchDropdown, setOpenSearchDropdown] = useState<boolean>(false);
   const { setGeoLocation } = useSearch();
+  const ref = useRef<HTMLInputElement | null>(null);
 
   // State use for api call
   const [hiddenQuery, setHiddenQuery] = useState<string>("");
 
   const debouncedQuery = useDebouncedCallback((value) => {
-    if (value !== "") setOpenSearchDropdown(true);
-    else setOpenSearchDropdown(false);
-    setHiddenQuery(value);
+    // API Query require at least 3 characters to cuntion
+    if (value.length >= 3) {
+      setHiddenQuery(value);
+      setOpenSearchDropdown(true);
+    } else setOpenSearchDropdown(false);
   }, 250);
 
   const { data: locationList, isFetching } = useApiGetLocationList(
@@ -48,6 +51,7 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
   return (
     <div className="flex gap-5 w-full">
       <div
+        onClick={() => ref.current?.focus()}
         className={cn("relative w-full bg-glass/20 rounded-3xl px-2", {
           "h-[60px] ": labelPosition === "inside",
         })}
@@ -61,8 +65,8 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
             {label}
           </Label>
         )}
-
         <Input
+          ref={ref}
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
