@@ -3,7 +3,7 @@ import apiCallHandler from "@/lib/axios";
 import { useFetchData } from "@/lib/reactQuery";
 import { UseQueryOptions } from "@tanstack/react-query";
 
-const endpoint = `http://api.openweathermap.org/geo/1.0/direct`;
+const endpoint = `https://api.openweathermap.org/geo/1.0/direct`;
 
 export type ILocationListResponse = {
   name: string;
