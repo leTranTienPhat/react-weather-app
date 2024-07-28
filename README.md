@@ -10,7 +10,8 @@ A brief description of what this project does and who it's for
 
 ## About the Project
 
-![Application Screenshot](https://imgur.com/a/gnL4d53)
+![Application Image](https://github.com/user-attachments/assets/07757e89-9a80-43f8-bc96-fb0c2cbab16e)
+
 Weather App is a dynamic web application designed to provide real-time weather information for any city across the globe.
 
 Key Features:
