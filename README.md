@@ -4,7 +4,7 @@
 
 1. [About the Project](#about)
 2. [App Features](#app-features)
-3. [Run the Project](#getting-started)
+3. [Run the Project](#run-the-project)
 
 ## About the Project
 
