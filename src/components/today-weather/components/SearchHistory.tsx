@@ -32,7 +32,6 @@ const SearchHistory = ({ selectedHistory, setSelectedHistory }: IProps) => {
 
   // View a history record
   const handleViewDetail = (history: ITodayWeatherResponse) => {
-    console.log("test");
     if (history.timestamp === selectedHistory?.timestamp) setSelectedHistory(null);
     else setSelectedHistory(history);
 
