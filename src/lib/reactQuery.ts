@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 
 const defaultOptions = {
   queries: {
+    retry: 1,
     refetchOnWindowFocus: false,
     refectOnMount: true,
     staleTime: 120 * 1000,

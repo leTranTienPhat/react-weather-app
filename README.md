@@ -1,6 +1,4 @@
-# Weather App - Check the current Weather around the World
-
-A brief description of what this project does and who it's for
+# Weather App - Check the current Weather around the World!
 
 ## Table of Contents
 
