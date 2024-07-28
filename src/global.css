@@ -71,7 +71,7 @@
 
     --glass: 0 0% 10%;
 
-    --background-url: url("src/assets/images/bg-dark.png");
+    --background-url: url("./src/assets/images/bg-dark.png");
   }
 }
 
