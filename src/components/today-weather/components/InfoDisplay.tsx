@@ -54,7 +54,7 @@ const InfoDisplay = ({ selectedHistory, setSelectedHistory }: IProps) => {
       <AnimatePresence initial={false}>
         {displayData?.weather && (
           <motion.div
-            key={selectedHistory?.id}
+            key={selectedHistory?.id + String(selectedHistory?.timestamp)}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", stiffness: 100, duration: 0.3 }}

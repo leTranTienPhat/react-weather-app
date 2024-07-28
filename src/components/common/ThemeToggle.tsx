@@ -8,7 +8,7 @@ type IProps = {
 };
 
 export function ThemeToggle({ className }: Readonly<IProps>) {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -20,9 +20,15 @@ export function ThemeToggle({ className }: Readonly<IProps>) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
+        <DropdownMenuItem disabled={theme === "light"} onClick={() => setTheme("light")}>
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled={theme === "dark"} onClick={() => setTheme("dark")}>
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled={theme === "system"} onClick={() => setTheme("system")}>
+          System
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

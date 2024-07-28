@@ -20,24 +20,29 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
   const [openSearchDropdown, setOpenSearchDropdown] = useState<boolean>(false);
   const { setGeoLocation } = useSearch();
 
+  // State use for api call
+  const [hiddenQuery, setHiddenQuery] = useState<string>("");
+
   const debouncedQuery = useDebouncedCallback((value) => {
     if (value !== "") setOpenSearchDropdown(true);
     else setOpenSearchDropdown(false);
-    setSearchQuery(value);
+    setHiddenQuery(value);
   }, 250);
 
   const { data: locationList, isFetching } = useApiGetLocationList(
     {
-      enabled: searchQuery !== "",
+      enabled: hiddenQuery !== "",
     },
     {
-      q: searchQuery,
+      q: hiddenQuery,
       limit: 5,
       appId: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
     }
   );
 
   const onSelectAction = (location: ILocationListResponse) => {
+    setSearchQuery("");
+    setHiddenQuery("");
     setGeoLocation({ lat: location.lat, lon: location.lon });
   };
   return (
@@ -58,7 +63,11 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
         )}
 
         <Input
-          onChange={(e) => debouncedQuery(e.target.value)}
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            debouncedQuery(e.target.value);
+          }}
           className="bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 scroll -mt-2 -mb-4"
           {...props}
         />

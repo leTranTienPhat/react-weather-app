@@ -76,7 +76,10 @@ const SearchHistory = ({ selectedHistory, setSelectedHistory }: IProps) => {
                   "bg-glass/70 hover:bg-glass/80": selectedHistory?.timestamp === history.timestamp,
                 })}
               >
-                <div className="flex justify-between items-center gap-4">
+                <div
+                  className="flex justify-between items-center gap-4 hover:cursor-pointer"
+                  onClick={() => handleViewDetail(history)}
+                >
                   <div className="grow flex justify-start md:justify-between flex-col md:flex-row items-start">
                     <p>{history.name}</p>
                     <p className="text-muted-foreground md:text-current text-sm md:text-base">
@@ -84,10 +87,7 @@ const SearchHistory = ({ selectedHistory, setSelectedHistory }: IProps) => {
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => handleViewDetail(history)}
-                      className="rounded-full bg-white dark:bg-transparent dark:border-white/40 dark:border-2 w-[34px] h-[34px] flex justify-center items-center hover:opacity-80"
-                    >
+                    <button className="rounded-full bg-white dark:bg-transparent dark:border-white/40 dark:border-2 w-[34px] h-[34px] flex justify-center items-center hover:opacity-80">
                       <SearchSvg fill={theme === "dark" ? svgColor.fadedWhite : svgColor.fadedBlack} />
                     </button>
                     <button

@@ -7,7 +7,7 @@ const Header = () => {
       <AutoCompleteInput placeholder="Enter a City Name, Country, City Code..." labelPosition="inside" label="City, Country" />
 
       {/* Toogle Light/Dark Mode */}
-      <ThemeToggle className="md:absolute right-10 top-6" />
+      <ThemeToggle className="absolute right-10 bottom-6 md:bottom-auto md:top-6" />
     </div>
   );
 };
