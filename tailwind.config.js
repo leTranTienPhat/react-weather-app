@@ -51,6 +51,14 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        leaf: {
+          DEFAULT: "hsl(var(--leaf))",
+          foreground: "hsl(var(--leaf-foreground))",
+        },
+        "leaf-bold": {
+          DEFAULT: "hsl(var(--leaf-bold))",
+          foreground: "hsl(var(--leaf-bold-foreground))",
+        },
         glass: {
           DEFAULT: "hsl(var(--glass))",
         }
@@ -76,7 +84,10 @@ module.exports = {
       },
       backgroundImage: {
         'site-background': "var(--background-url)",
-      }
+      },
+      screens: {
+        'xs': '480px', // You can set this to any value you prefer
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
