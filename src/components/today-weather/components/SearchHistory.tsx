@@ -32,6 +32,7 @@ const SearchHistory = ({ selectedHistory, setSelectedHistory }: IProps) => {
 
   // View a history record
   const handleViewDetail = (history: ITodayWeatherResponse) => {
+    console.log("test");
     if (history.timestamp === selectedHistory?.timestamp) setSelectedHistory(null);
     else setSelectedHistory(history);
 
@@ -91,7 +92,10 @@ const SearchHistory = ({ selectedHistory, setSelectedHistory }: IProps) => {
                       <SearchSvg fill={theme === "dark" ? svgColor.fadedWhite : svgColor.fadedBlack} />
                     </button>
                     <button
-                      onClick={() => handleDeleteHistory(history)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteHistory(history);
+                      }}
                       className="rounded-full bg-white dark:bg-transparent dark:border-white/40 dark:border-2 w-[34px] h-[34px] flex justify-center items-center hover:opacity-80"
                     >
                       <DeleteSvg fill={theme === "dark" ? svgColor.fadedWhite : svgColor.fadedBlack} />
