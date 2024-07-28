@@ -5,11 +5,15 @@ import { PLACEHOLDER } from "@/constants/variables";
 import { useLocalStorage } from "@/context/LocalStorageContext";
 import { useSearch } from "@/context/SearchContext";
 import { dateFormat } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
-const InfoDisplay = () => {
+type IProps = {
+  selectedHistory: ITodayWeatherResponse | null;
+  setSelectedHistory: Dispatch<SetStateAction<ITodayWeatherResponse | null>>;
+};
+
+const InfoDisplay = ({ selectedHistory, setSelectedHistory }: IProps) => {
   const { geoLocation } = useSearch();
-  const [currentDate] = useState<Date>(new Date());
   const { setStorage, getStorage } = useLocalStorage(WEATHER_STORAGE);
 
   const { data: weatherData } = useApiTodayWeather(
@@ -29,10 +33,11 @@ const InfoDisplay = () => {
       const historyData = getStorage() as ITodayWeatherResponse[];
 
       const currentHistory: ITodayWeatherResponse[] = historyData ?? [];
-      const newHistory = [weatherData, ...currentHistory];
+      const newHistory = [{ ...weatherData, timestamp: new Date() }, ...currentHistory];
 
       // Save updated history to localStorage
       setStorage(newHistory);
+      setSelectedHistory(null);
     }
   }, [weatherData, setStorage]);
 
@@ -41,33 +46,37 @@ const InfoDisplay = () => {
     return `${Math.round(temp)}°`;
   };
 
+  const displayData = selectedHistory ?? weatherData;
+
   return (
     <div className="relative">
-      {weatherData?.weather && (
+      {displayData?.weather && (
         <img
-          src={weatherData?.weather[0].id >= 700 ? images.sun : images.cloud}
+          src={displayData?.weather[0].id >= 700 ? images.sun : images.cloud}
           alt="current weather"
           className="w-[140px] md:w-[300px] absolute -top-[80px] md:-top-[120px] -right-[40px] transition-all"
         />
       )}
       <div>
         <h1 className="font-semibold">Today's Weather</h1>
-        <p className="text-[100px] leading-none text-primary dark:text-white font-bold">
-          {generateTemp(weatherData?.main?.temp)}
+        <p className="text-[80px] sm:text-[100px] leading-none text-primary dark:text-white font-bold">
+          {generateTemp(displayData?.main?.temp)}
         </p>
         <p className="font-semibold">
-          H:{generateTemp(weatherData?.main?.temp_max)} L:{generateTemp(weatherData?.main?.temp_min)}
+          H:{generateTemp(displayData?.main?.temp_max)} L:{generateTemp(displayData?.main?.temp_min)}
         </p>
-        <div className="flex justify-between items-center">
+        <div className="xs:flex justify-between items-center text-sm sm:text-base">
           <span className="font-bold text-muted-foreground grow pr-5">
-            {weatherData?.name ?? PLACEHOLDER}, {weatherData?.sys?.country ?? PLACEHOLDER}
+            {displayData?.name ?? PLACEHOLDER}, {displayData?.sys?.country ?? PLACEHOLDER}
           </span>
-          <div className="absolute grow gap-5 md:static flex flex-col-reverse md:flex-row md:justify-between right-0 bottom-0 text-right">
-            <span className="text-muted-foreground">{weatherData ? dateFormat(currentDate, true) : PLACEHOLDER}</span>
+          <div className="xs:absolute grow gap-5 md:static flex xs:flex-col-reverse md:flex-row md:justify-between right-0 bottom-0 xs:text-right pt-2 xs:pt-0">
             <span className="text-muted-foreground">
-              Humidity: {weatherData?.main?.humidity ? weatherData?.main?.humidity.toString() + "%" : PLACEHOLDER}
+              {displayData?.timestamp ? dateFormat(displayData?.timestamp, true) : dateFormat(new Date(), true)}
             </span>
-            <span className="text-muted-foreground">{weatherData?.weather?.[0].main ?? PLACEHOLDER} </span>
+            <span className="text-muted-foreground">
+              Humidity: {displayData?.main?.humidity ? displayData?.main?.humidity.toString() + "%" : PLACEHOLDER}
+            </span>
+            <span className="text-muted-foreground">{displayData?.weather?.[0].main ?? PLACEHOLDER} </span>
           </div>
         </div>
       </div>

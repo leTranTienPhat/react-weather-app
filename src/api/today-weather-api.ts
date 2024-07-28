@@ -52,6 +52,7 @@ export type ITodayWeatherResponse = {
     sunrise?: number;
     sunset?: number;
   };
+  timestamp?: string;
 };
 
 type IParams = IApiParams & { lat: number; lon: number; appId: string; unit?: string };

@@ -84,7 +84,10 @@ module.exports = {
       },
       backgroundImage: {
         'site-background': "var(--background-url)",
-      }
+      },
+      screens: {
+        'xs': '480px', // You can set this to any value you prefer
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

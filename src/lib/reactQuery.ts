@@ -1,6 +1,6 @@
 import useUrlString, { IApiParams } from "@/hooks/useUrlString";
 import { IErrorResponse } from "@/lib/axios";
-import { UseQueryOptions, UseQueryResult, useQuery, useMutation, keepPreviousData, QueryClient } from "@tanstack/react-query";
+import { UseQueryOptions, UseQueryResult, useQuery, useMutation, QueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 const defaultOptions = {
@@ -9,7 +9,6 @@ const defaultOptions = {
     refectOnMount: true,
     staleTime: 120 * 1000,
     gcTime: 300 * 1000,
-    placeholderData: keepPreviousData,
   },
 };
 

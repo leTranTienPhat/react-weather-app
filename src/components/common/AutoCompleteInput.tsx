@@ -40,7 +40,6 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
   const onSelectAction = (location: ILocationListResponse) => {
     setGeoLocation({ lat: location.lat, lon: location.lon });
   };
-  console.log(locationList);
   return (
     <div className="flex gap-5 w-full">
       <div
@@ -78,7 +77,7 @@ const AutoCompleteInput = ({ label, labelPosition, ...props }: IProps) => {
                   <DropdownMenuItem key={location.name + idx} onClick={() => onSelectAction(location)}>
                     <span className="font-bold pr-2">{location.name}</span>
                     <span className="text-muted-foreground">
-                      {location.state}, {location.country}
+                      {location.state} {location.country}
                     </span>
                   </DropdownMenuItem>
                 ))}
