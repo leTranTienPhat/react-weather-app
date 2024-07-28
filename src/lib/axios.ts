@@ -14,6 +14,7 @@ export const API_TIMEOUT_DURATION = 30000;
 export const axiosClient = axios.create({
   timeout: API_TIMEOUT_DURATION,
   headers: {
+    "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
   },
 });
