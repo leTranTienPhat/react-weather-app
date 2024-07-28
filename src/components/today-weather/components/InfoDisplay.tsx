@@ -61,7 +61,7 @@ const InfoDisplay = ({ selectedHistory, setSelectedHistory }: IProps) => {
             className="absolute -top-[80px] md:-top-[120px] -right-[40px]"
           >
             <img
-              src={displayData?.weather[0].id >= 700 ? images.sun : images.cloud}
+              src={displayData?.weather[0].id === 802 ? images.cloud : images.sun}
               alt="current weather"
               className="w-[140px] md:w-[300px]"
             />
